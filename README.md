@@ -1,3 +1,4 @@
-# template
+# Simple Weather App
 
-Template repo using Webpack
+This is a simple weather app that uses promises to deliver the weather to a user
+based on their location.
