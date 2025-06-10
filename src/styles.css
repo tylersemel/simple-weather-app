@@ -1,7 +1,104 @@
-* {
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
+/* 2. Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
 body {
-  background-color: rgb(184, 255, 108);
+  /* 4. Add accessible line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 6. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 7. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 8. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/*
+  10. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+:root {
+  --main-bg-color: rgb(208, 250, 255);
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.root.container {
+  height: 100vh;
+  max-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-bg-color);
+}
+
+.box {
+  font-size: 4rem;
+  border: 1rem solid rgb(0, 196, 226);
+  padding: 30px 35px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  box-shadow: 2px 2px 7px 1px rgb(54, 95, 143);
 }
