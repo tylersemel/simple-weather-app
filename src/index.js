@@ -7,11 +7,11 @@ if (process.env.NODE_ENV !== "production") {
 
 console.log("I'm working!");
 
-const weatherForecast =
-  await WeatherManager.getWeatherForecastFromLocation("North Carolina");
+// const weatherForecast =
+//   await WeatherManager.getWeatherForecastFromLocation("North Carolina");
 
-console.log(weatherForecast.currentUnit);
-weatherForecast.toggleUnits();
-console.log(weatherForecast.currentUnit);
-// DomManager.setWeatherSpan();
-console.log(weatherForecast);
+// console.log(weatherForecast.currentUnit);
+// weatherForecast.toggleUnits();
+// console.log(weatherForecast.currentUnit);
+// // DomManager.setWeatherSpan();
+// console.log(weatherForecast);

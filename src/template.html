@@ -7,54 +7,29 @@
   </head>
   <body>
     <div class="root container">
-      <div class="header">
-        <div class="time">3:38PM</div>
-        <div class="location-section">
-          <span class="location">California</span>
-          <div class="location-dropdown">
-            <button class="change-location">⌄</button>
-            <div class="location-list">
-              <div class="location-item">California</div>
-              <div class="location-item">New York</div>
-              <div class="location-item">Florida</div>
-              <div class="location-item">Brazil</div>
-            </div>
+      <header>
+        <div class="header-items">
+          <div class="location-display">
+            <span>Weather for</span>
+            <span class="current-location">San Jose, CA</span>
+          </div>
+          <div class="location-search">
+            <search>
+              <form action="">
+                <label for="location">Enter a location:</label>
+                <input type="search" id="location" name="location" />
+                <button type="submit">Search</button>
+              </form>
+            </search>
           </div>
         </div>
+      </header>
+      <div class="main-container">
+        <main class="weather">
+          <span>wicasdf</span>
+          check
+        </main>
       </div>
-      <main class="current-weather">
-        <div class="left col">
-          <div class="weather-icon temp"></div>
-          <div class="conditions"></div>
-        </div>
-        <div class="right col">
-          <div class="moonphase">
-            <div class="moon-icon"></div>
-            <div class="moon-desc">
-              <div class="moon">
-                <span>Moon:</span>
-                <span class="percentage"></span>
-              </div>
-              <div class="phase"></div>
-            </div>
-          </div>
-          <div class="weather-info">
-            <div class="precipitation-section">
-              <span>Precipitation:</span>
-              <span class="precipitation"></span>
-            </div>
-            <div class="humidity-section">
-              <span>Humidity:</span>
-              <span class="humidity"></span>
-            </div>
-            <div class="wind-section">
-              <span>Wind:</span>
-              <span class="wind"></span>
-            </div>
-          </div>
-        </div>
-      </main>
-      <div class="next-days"></div>
     </div>
   </body>
 </html>

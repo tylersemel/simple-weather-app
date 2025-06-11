@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "merriweather_sansregular";
+  src:
+    url("./fonts/merriweathersans-regular-webfont.woff2") format("woff2"),
+    url("./fonts/merriweathersans-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* 1. Use a more-intuitive box-sizing model */
 *,
 *::before,
@@ -76,29 +85,59 @@ h6 {
 }
 
 :root {
-  --main-bg-color: rgb(208, 250, 255);
+  --main-bg-color: rgb(255, 255, 255);
+  --card-border-radius: 5px;
+  --main-margin: 0 10%;
 }
 
 html,
 body {
-  height: 100%;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  height: 90vh;
+  width: 100%;
+  font-family:
+    "merriweather_sansregular", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .root.container {
-  height: 100vh;
-  max-height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--main-bg-color);
+  min-height: 100%;
+  height: 100%;
+  max-height: 100vh;
+  width: 100vw;
+  max-width: 100%;
+  position: relative;
 }
 
-.box {
+header {
+  position: sticky;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: aliceblue;
+}
+
+.header-items {
+  margin: var(--main-margin);
+  width: 100%;
+  background-color: red;
+  padding: 2px;
+}
+
+.main-container {
+  height: 100%;
+  width: 100%;
+  background-color: rebeccapurple;
+}
+
+main {
+  margin: var(--main-margin);
+  padding: 2px;
+}
+
+/* .box {
   font-size: 4rem;
   border: 1rem solid rgb(0, 196, 226);
   padding: 30px 35px;
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
   box-shadow: 2px 2px 7px 1px rgb(54, 95, 143);
-}
+} */

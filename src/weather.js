@@ -101,6 +101,7 @@ export const WeatherManager = (() => {
     );
 
     const data = await response.json();
+    // console.log(data);
 
     return createWeatherForecast(data);
   }
