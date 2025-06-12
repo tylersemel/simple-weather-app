@@ -102,13 +102,13 @@ h6 {
   --color-ivory: #f9fbf2;
   --color-light-cyan: #d7f9ff;
   --color-jordy-blue: #afcbff;
-  --color-oxford-blue: #0e1c36;
+  --color-oxford-blue: #0e1b34;
 }
 
 html,
 body {
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   /* width: 100vw; */
   font-family:
     "merriweather_sansregular", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -136,7 +136,7 @@ input[type="text"] {
   outline: inherit;
 }
 
-.container {
+.root.container {
   height: 100%;
   width: 100%;
   position: relative;
@@ -158,24 +158,57 @@ input[type="text"] {
 
 .header-items {
   color: white;
-  width: 80%;
   display: grid;
-  grid-template-columns: 350px 350px;
+  grid-template-columns: minmax(400px, 1fr) minmax(400px, 1fr);
   grid-template-rows: 1fr;
   gap: 10px;
 }
 
 .location-search {
   justify-self: end;
+  width: 100%;
+}
+
+.location-search search {
+  width: 100%;
+}
+
+.location-search search form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  /* background-color: #37476b; */
+  border-radius: var(--card-border-radius);
+  /* padding: 8px 10px; */
+}
+
+.location-search search form p {
+  background-color: white;
+  padding: 3px;
+  border-radius: var(--card-border-radius);
+  width: 90%;
+}
+
+.location-search search form label {
+  transform: rotateX("30");
+  color: black;
+  padding: 0 2px;
+  width: 100%;
 }
 
 .header-items .location-search .location-display {
   font: "merriweather_sansbold";
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header-items .location-search #location {
   /* display: none; */
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
   border-radius: 5px;
   padding-left: 2px;
   color: gray;
@@ -183,10 +216,10 @@ input[type="text"] {
 
 .header-items .location-search button {
   /* display: none; */
-  background-color: rgb(176, 176, 176);
+  background-color: rgb(211, 211, 211);
   border-radius: 5px;
-  color: black;
-  /* padding: 2px; */
+  color: rgb(59, 59, 59);
+  padding: 3px 8px;
 }
 
 .main-container .weather .cards-container {
