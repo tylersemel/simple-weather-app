@@ -7,6 +7,15 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "merriweather_sansbold";
+  src:
+    url("./fonts/merriweathersans-bold-webfont.woff2") format("woff2"),
+    url("./fonts/merriweathersans-bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* 1. Use a more-intuitive box-sizing model */
 *,
 *::before,
@@ -88,56 +97,100 @@ h6 {
   --main-bg-color: rgb(255, 255, 255);
   --card-border-radius: 5px;
   --main-margin: 0 10%;
+  --center-max-width: 900px;
+  --color-linen: #ffede1;
+  --color-ivory: #f9fbf2;
+  --color-light-cyan: #d7f9ff;
+  --color-jordy-blue: #afcbff;
+  --color-oxford-blue: #0e1c36;
 }
 
 html,
 body {
-  height: 90vh;
+  height: 100vh;
   width: 100%;
+  /* width: 100vw; */
   font-family:
     "merriweather_sansregular", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.root.container {
-  min-height: 100%;
-  height: 100%;
-  max-height: 100vh;
-  width: 100vw;
-  max-width: 100%;
-  position: relative;
+/* Reset button look */
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
-header {
-  position: sticky;
+input[type="text"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  outline: inherit;
+}
+
+.container {
+  height: 100%;
   width: 100%;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 60px auto;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+
   display: flex;
   justify-content: center;
-  background-color: aliceblue;
+  align-items: center;
+  width: 100%;
+  background-color: var(--color-oxford-blue);
 }
 
 .header-items {
-  margin: var(--main-margin);
-  width: 100%;
-  background-color: red;
-  padding: 2px;
+  color: white;
+  width: 80%;
+  display: grid;
+  grid-template-columns: 350px 350px;
+  grid-template-rows: 1fr;
+  gap: 10px;
 }
 
-.main-container {
-  height: 100%;
-  width: 100%;
-  background-color: rebeccapurple;
+.location-search {
+  justify-self: end;
 }
 
-main {
-  margin: var(--main-margin);
-  padding: 2px;
+.header-items .location-search .location-display {
+  font: "merriweather_sansbold";
 }
 
-/* .box {
-  font-size: 4rem;
-  border: 1rem solid rgb(0, 196, 226);
-  padding: 30px 35px;
+.header-items .location-search #location {
+  /* display: none; */
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
-  box-shadow: 2px 2px 7px 1px rgb(54, 95, 143);
-} */
+  padding-left: 2px;
+  color: gray;
+}
+
+.header-items .location-search button {
+  /* display: none; */
+  background-color: rgb(176, 176, 176);
+  border-radius: 5px;
+  color: black;
+  /* padding: 2px; */
+}
+
+.main-container .weather .cards-container {
+}
+
+.cards-container .card {
+}

@@ -7,27 +7,51 @@
   </head>
   <body>
     <div class="root container">
-      <header>
+      <div class="header">
         <div class="header-items">
           <div class="location-display">
             <span>Weather for</span>
             <span class="current-location">San Jose, CA</span>
           </div>
           <div class="location-search">
-            <search>
-              <form action="">
-                <label for="location">Enter a location:</label>
-                <input type="search" id="location" name="location" />
-                <button type="submit">Search</button>
-              </form>
-            </search>
+            <!-- <search> -->
+            <form action="">
+              <label for="location"></label>
+              <input
+                type="text"
+                id="location"
+                name="location"
+                placeholder="Enter a location"
+              />
+              <button type="submit">Search</button>
+            </form>
+            <!-- </search> -->
           </div>
         </div>
-      </header>
+      </div>
       <div class="main-container">
         <main class="weather">
-          <span>wicasdf</span>
-          check
+          <div class="cards-container">
+            <div class="card today">
+              <div class="today-top">
+                <span>Today's Weather</span>
+                <span class="date">Wed, June 11</span>
+              </div>
+              <div class="low-hi-temps">
+                <div class="low">
+                  <span>Low:</span>
+                  <span class="low">12</span>
+                </div>
+                <div class="hi">
+                  <span>Hi:</span>
+                  <span class="hi">56</span>
+                </div>
+              </div>
+              <div class="description">
+                <span>Partially cloudy</span>
+              </div>
+            </div>
+          </div>
         </main>
       </div>
     </div>
