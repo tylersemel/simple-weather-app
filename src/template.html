@@ -32,26 +32,105 @@
         </div>
       </div>
       <div class="main-container">
-        <main class="weather">
-          <div class="cards-container">
-            <div class="card current-location"></div>
-            <div class="card today">
-              <div class="today-top">
-                <span>Today's Weather</span>
-                <span class="date">Wed, June 11</span>
-              </div>
-              <div class="low-hi-temps">
-                <div class="low">
+        <main class="weather-cards">
+          <div class="card today">
+            <div class="today-top subheader">
+              <span>TODAY'S WEATHER</span>
+              <span class="date">WED, JUN 11</span>
+            </div>
+            <hr />
+            <div class="card-body">
+              <div class="lo-hi-temps">
+                <div class="lo">
                   <span>Low:</span>
-                  <span class="low">12</span>
+                  <span class="lo">12°F</span>
                 </div>
                 <div class="hi">
                   <span>Hi:</span>
-                  <span class="hi">56</span>
+                  <span class="hi">56°F</span>
                 </div>
               </div>
               <div class="description">
-                <span>Partially cloudy</span>
+                <span
+                  >Partly cloudy throughout the day with early morning
+                  rain.</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="card today">
+            <div class="today-top subheader">
+              <span>TODAY'S WEATHER</span>
+              <span class="date">WED, JUN 11</span>
+            </div>
+            <hr />
+            <div class="card-body">
+              <div class="lo-hi-temps">
+                <div class="temp lo">
+                  <!-- Icon space here -->
+                  <div class="icon"></div>
+                  <strong>
+                    <span>Lo:</span>
+                    <span class="lo-degree">12°F</span>
+                  </strong>
+                </div>
+                <div class="temp hi">
+                  <div class="icon"></div>
+                  <strong>
+                    <span>Hi:</span>
+                    <span class="hi-degree">56°F</span>
+                  </strong>
+                </div>
+              </div>
+              <div class="description">
+                <span>
+                  Partly cloudy throughout the day with early morning rain.
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="card current-weather">
+            <div class="subheader">
+              <span>CURRENT WEATHER</span>
+              <span class="time">2:03PM</span>
+            </div>
+            <hr />
+            <div class="card-body">
+              <div class="card-left">
+                <div class="card-left-top">
+                  <div class="icon"></div>
+                  <div class="current-degree-feel">
+                    <div class="degree">
+                      <span>89</span>
+                      <div class="f-or-c">
+                        <button id="fahrenheit">°F</button>
+                        <div class="vertical-break"></div>
+                        <button id="celsius">°C</button>
+                      </div>
+                    </div>
+                    <div class="feels-like">
+                      <span>Feels like</span>
+                      <span>92°</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-left-bottom">
+                  <span class="conditions">Sunny</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="precip-info">
+                  <span>Precipitation:</span>
+                  <span class="precipitation">0%</span>
+                </div>
+                <div class="humidity-info">
+                  <span>Humidity:</span>
+                  <span class="humidity">70%</span>
+                </div>
+                <div class="wind-info">
+                  <span>Wind:</span>
+                  <span class="windspeed">4mph</span>
+                </div>
               </div>
             </div>
           </div>
