@@ -415,12 +415,23 @@ input[type="text"] {
 }
 
 .card .card-body .card-left .degree .f-or-c .vertical-break {
-  /* background-color: gray; */
   margin: 0 2px 0 4px;
-  height: var(--default-font-size);
+  height: calc(var(--default-font-size) - 4px);
   border: 0;
   border: 0.8px solid rgb(144, 144, 144);
   border-radius: 2px;
+}
+
+#celsius {
+  color: rgb(163, 163, 163);
+}
+
+.card .card-body .card-left .current-degree-feel .degree {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  gap: 5px;
 }
 
 .card .card-body .card-left .current-degree-feel .f-or-c {
@@ -429,14 +440,6 @@ input[type="text"] {
   align-items: center;
   justify-content: center;
   gap: 1px;
-}
-
-.card .card-body .card-left .current-degree-feel .degree {
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: start;
-  gap: 5px;
 }
 
 .card .card-body .feels-like {
