@@ -147,18 +147,15 @@ h6 {
   --color-oxford-blue: rgb(27, 28, 32);
 
   --default-font-size: 20px; /* 18-24px */
-  --header-font-size: 35px; /* 35-50px */
+  --header-font-size: 55px; /* 35-50px */
   --secondary-text-font-size: 16px;
 
   --main-text-color: black;
   --header-text-color: white;
   --secondary-text-color: rgb(115, 115, 115);
 
-  /* --font-bold: "oswald_demibold";
-  --font-regular: "oswald_regular"; */
-
   --font-bold: "oswald_demibold";
-  --font-regular: "Lucida Sans";
+  --font-regular: "oswald_regular";
 }
 
 html,
@@ -268,7 +265,7 @@ input[type="text"] {
   align-items: center;
   flex-wrap: nowrap;
 
-  background-color: rgb(243, 247, 248);
+  background-color: rgb(255, 255, 255);
   padding: 3px;
   border-radius: var(--card-border-radius);
   width: 80%;
@@ -307,7 +304,7 @@ input[type="text"] {
   min-width: 100px;
   background-color: var(--color-light-cyan);
   display: grid;
-  grid-template-columns: minmax(100px, 700px);
+  grid-template-columns: minmax(100px, 800px);
   grid-template-rows: 1fr;
   justify-content: center;
   align-items: start;
@@ -316,7 +313,7 @@ input[type="text"] {
 /* Contains all cards*/
 .weather-cards {
   width: 100%;
-  margin-top: 20px;
+  margin: 20px 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -339,7 +336,7 @@ input[type="text"] {
 .card .subheader {
   padding: 18px 25px 2px;
   font-size: var(--secondary-text-font-size);
-  font-family: var(--font-bold);
+  font-family: var(--font-regular);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -481,6 +478,41 @@ input[type="text"] {
   font-size: var(--secondary-text-font-size);
 }
 
+.card.current-weather .card-body .card-right {
+  width: 50%;
+  text-align: right;
+}
+
+.card.current-weather .card-body .card-right > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.card.current-weather .card-body .card-right > div > span:first-child {
+  /* width: 60%; */
+  display: block;
+  text-align: right;
+  color: var(--secondary-text-color);
+}
+.card.current-weather .card-body .card-right hr {
+  width: 100%;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 2px solid #e7e7e7;
+  margin: 0.2em 0;
+  padding: 0;
+  justify-self: end;
+}
+
+.card.current-weather .card-body .card-right > div > span:nth-child(2) {
+  display: block;
+  /* background-color: rgb(116, 126, 255); */
+}
+
 /* Sun details */
 
 .card.sun {
@@ -540,4 +572,52 @@ input[type="text"] {
 
 .card.moon .percentage {
   /* font-size: var(--header-font-size); */
+}
+
+/* Weekly Forecast Card */
+
+.card.forecast {
+  width: 100%;
+}
+
+.card.forecast .card-body {
+  width: 100%;
+  /* height: 150px; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.card.forecast .card-body .day {
+  padding: 10px;
+  /* height: 100%; */
+  border: 2px solid rgb(222, 222, 222);
+  /* background-color: rgb(245, 245, 245); */
+  border-radius: var(--card-border-radius);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 5px;
+  align-items: center;
+}
+
+.card.forecast .card-body .day .icon {
+  height: 60px;
+  width: 60px;
+  background-color: rgb(0, 195, 10);
+  border-radius: 50%;
+}
+
+.card.forecast .card-body .day .hi-lo {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: space-between;
+  align-items: center;
+  /* font-size: var(--secondary-text-font-size); */
 }
