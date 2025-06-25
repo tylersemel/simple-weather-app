@@ -8,15 +8,14 @@ export const WeatherManager = (() => {
     }
 
     setMoonphase(amount) {
+      let product = (amount - 0.5) * 100;
+
       if (amount <= 0.5) {
-        let product = (amount + 0.5) * 100;
-        product = product.toFixed(0);
-        this.percentageUntilFull = String(product) + "%";
-      } else {
-        let product = (amount - 0.5) * 100;
-        product = product.toFixed(0);
-        this.percentageUntilFull = String(product) + "%";
+        product = (amount + 0.5) * 100;
       }
+
+      product = product.toFixed(0);
+      this.percentageUntilFull = String(product) + "%";
 
       if (amount == 0) {
         this.phase = "New Moon";
@@ -38,21 +37,26 @@ export const WeatherManager = (() => {
     }
   }
 
+  //for each day and the basic info about current weather
   class Weather {
+    feelsLike = 0;
     temp = 0;
-    minTemp = 0;
-    maxTemp = 0;
-    conditions = "";
+    tempMin = 0;
+    tempMax = 0;
+    conditions = ""; //short description
     icon = "";
     precipitation = 0;
     humidity = 0;
     wind = 0;
     date = "";
+    dateTime = "";
+    description = ""; // long description for overall day
 
     constructor(
+      feelsLike,
       temp,
-      minTemp,
-      maxTemp,
+      tempMin,
+      tempMax,
       conditions,
       icon,
       precipitation,
@@ -60,10 +64,13 @@ export const WeatherManager = (() => {
       wind,
       moon,
       date,
+      dateTime,
+      description,
     ) {
+      this.feelsLike = feelsLike;
       this.temp = temp;
-      this.minTemp = minTemp;
-      this.maxTemp = maxTemp;
+      this.tempMin = tempMin;
+      this.tempMax = tempMax;
       this.conditions = conditions;
       this.icon = icon;
       this.precipitation = precipitation;
@@ -71,6 +78,8 @@ export const WeatherManager = (() => {
       this.wind = wind;
       this.moon = new Moonphase(moon);
       this.date = date;
+      this.dateTime = dateTime; //like 2PM
+      this.description = description;
     }
   }
 
@@ -78,13 +87,15 @@ export const WeatherManager = (() => {
     days = [];
     location = "";
     currentWeather;
+    description = "Look ahead";
     UNITS = ["F", "C"];
     currentUnit = this.UNITS[0];
 
-    constructor(currentWeather, days, location) {
-      this.days = days;
-      this.location = location;
+    constructor(currentWeather, days, description, location) {
       this.currentWeather = currentWeather;
+      this.days = days;
+      this.description = description; //weekly description
+      this.location = location;
     }
 
     toggleUnits() {
@@ -101,7 +112,7 @@ export const WeatherManager = (() => {
     );
 
     const data = await response.json();
-    // console.log(data);
+    console.log(data);
 
     return createWeatherForecast(data);
   }
@@ -109,39 +120,51 @@ export const WeatherManager = (() => {
   function createWeatherForecast(data) {
     try {
       let days = [];
+      //current weather wont have a max or min
       let currentWeather = new Weather(
+        data.currentConditions.feelslike,
         data.currentConditions.temp,
-        data.currentConditions.minTemp,
-        data.currentConditions.maxTemp,
+        data.currentConditions.temp,
+        data.currentConditions.temp,
         data.currentConditions.conditions,
-        data.currentConditionsicon,
-        data.currentConditions.precipitation,
+        data.currentConditions.icon,
+        data.currentConditions.precip,
         data.currentConditions.humidity,
         data.currentConditions.windspeed,
         data.currentConditions.moonphase,
         "Current Day",
+        data.currentConditions.dateTime,
+        data.days[0].description,
       );
 
       if (data.days.length >= NEXT_DAYS) {
         for (let i = 0; i < NEXT_DAYS; i++) {
           let weather = new Weather(
+            data.days[i].feelslike,
             data.days[i].temp,
-            data.days[i].minTemp,
-            data.days[i].maxTemp,
+            data.days[i].tempmin,
+            data.days[i].tempmax,
             data.days[i].conditions,
             data.days[i].icon,
-            data.days[i].precipitation,
+            data.days[i].precip,
             data.days[i].humidity,
             data.days[i].windspeed,
             data.days[i].moonphase,
             data.days[i].datetime,
+            "",
+            data.days[i].description,
           );
 
           days.push(weather);
         }
       }
 
-      return new WeatherForecast(currentWeather, days, data.address);
+      return new WeatherForecast(
+        currentWeather,
+        days,
+        data.description,
+        data.address,
+      );
     } catch (err) {
       console.error(err);
     }

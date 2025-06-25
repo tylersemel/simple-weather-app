@@ -310,6 +310,19 @@ input[type="text"] {
   align-items: start;
 }
 
+.intro-search {
+  margin: 20px;
+  justify-self: center;
+  width: 80%;
+  height: 40%;
+  background-color: #ffffff;
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Contains all cards*/
 .weather-cards {
   width: 100%;
@@ -474,7 +487,7 @@ input[type="text"] {
   gap: 1px;
 }
 
-.card.current-weather .card-body .feels-like {
+.card.current-weather .card-body .feels-like-container {
   font-size: var(--secondary-text-font-size);
 }
 
