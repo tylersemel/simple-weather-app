@@ -4,6 +4,15 @@ export const Dom = (() => {
   const headerElement = rootContainer.querySelector(".header");
   const mainContainer = rootContainer.querySelector(".main-container");
 
+  const locationSearchForm = headerElement.querySelector(
+    ".location-search form",
+  );
+
+  locationSearchForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    console.log("syumitabdf");
+  });
+
   function setHeaderElements(location) {
     const currentLocationElement =
       headerElement.querySelector(".current-location");
