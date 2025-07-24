@@ -33,135 +33,134 @@
       </div>
       <div class="main-container">
         <main class="weather-cards">
-          <div class="card today">
-            <div class="today-top subheader">
-              <span>TODAY'S WEATHER</span>
-              <span class="date">WED, JUN 11</span>
-            </div>
-            <hr />
-            <div class="card-body">
-              <div class="lo-hi-temps">
-                <div class="temp lo">
-                  <!-- Icon space here -->
-                  <div class="icon"></div>
-                  <span>Lo:</span>
-                  <span class="lo-degree">12°F</span>
-                </div>
-                <div class="temp hi">
-                  <div class="icon"></div>
-
-                  <span>Hi:</span>
-                  <span class="hi-degree">56°F</span>
-                </div>
+          <div class="column left-cards">
+            <div class="card today">
+              <div class="today-top subheader">
+                <span>TODAY'S WEATHER</span>
+                <span class="date">WED, JUN 11</span>
               </div>
-              <div class="description">
-                <span>
-                  Partly cloudy throughout the day with early morning rain.
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="card current-weather">
-            <div class="subheader">
-              <span>CURRENT WEATHER</span>
-              <span class="time">2:03PM</span>
-            </div>
-            <hr />
-            <div class="card-body">
-              <div class="card-left">
-                <div class="card-left-top">
-                  <div class="icon"></div>
-                  <div class="current-degree-feel">
-                    <div class="degree">
-                      <span class="current-degrees">89°</span>
-                      <div class="f-or-c">
-                        <button id="fahrenheit">F</button>
-                        <div class="vertical-break"></div>
-                        <button id="celsius">C</button>
-                      </div>
-                    </div>
-                    <div class="feels-like-container">
-                      <span>Feels like</span>
-                      <span class="feels-like">92°</span>
-                    </div>
+              <hr />
+              <div class="card-body">
+                <div class="lo-hi-temps">
+                  <div class="temp lo">
+                    <!-- Icon space here -->
+                    <div class="icon"></div>
+                    <span>Lo:</span>
+                    <span class="lo-degree">12°F</span>
+                  </div>
+                  <div class="temp hi">
+                    <div class="icon"></div>
+                    <span>Hi:</span>
+                    <span class="hi-degree">56°F</span>
                   </div>
                 </div>
-                <div class="card-left-bottom">
-                  <span class="conditions">Sunny</span>
+                <div class="description">
+                  <span>
+                    Partly cloudy throughout the day with early morning rain.
+                  </span>
                 </div>
               </div>
-              <div class="card-right">
-                <div class="precip-info">
-                  <span>Precipitation</span>
-
-                  <span class="precipitation">0%</span>
+            </div>
+            <div class="card current-weather">
+              <div class="subheader">
+                <span>CURRENT WEATHER</span>
+                <span class="time">2:03PM</span>
+              </div>
+              <hr />
+              <div class="card-body">
+                <div class="card-left">
+                  <div class="card-left-top">
+                    <div class="icon"></div>
+                    <div class="current-degree-feel">
+                      <div class="degree">
+                        <span class="current-degrees">89°</span>
+                        <div class="f-or-c">
+                          <button id="fahrenheit">F</button>
+                          <div class="vertical-break"></div>
+                          <button id="celsius">C</button>
+                        </div>
+                      </div>
+                      <div class="feels-like-container">
+                        <span>Feels like</span>
+                        <span class="feels-like">92°</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-left-bottom">
+                    <span class="conditions">Sunny</span>
+                  </div>
                 </div>
-                <hr />
-                <div class="humidity-info">
-                  <span>Humidity</span>
-
-                  <span class="humidity">70%</span>
+                <div class="card-right">
+                  <div class="precip-info">
+                    <span>Precipitation</span>
+                    <span class="precipitation">0%</span>
+                  </div>
+                  <hr />
+                  <div class="humidity-info">
+                    <span>Humidity</span>
+                    <span class="humidity">70%</span>
+                  </div>
+                  <hr />
+                  <div class="wind-info">
+                    <span>Wind</span>
+                    <span class="windspeed">4mph</span>
+                  </div>
                 </div>
-                <hr />
-                <div class="wind-info">
-                  <span>Wind</span>
-                  <span class="windspeed">4mph</span>
+              </div>
+            </div>
+            <div class="card sun">
+              <div class="subheader">
+                <span>SUN</span>
+              </div>
+              <hr />
+              <div class="card-body">
+                <div class="card-left">
+                  <div class="icon"></div>
+                  <span>UV Radiation: 13%</span>
                 </div>
+                <div class="card-right">
+                  <div class="rise">
+                    <span>Rise: </span>
+                    <span class="sunrise">5:59AM</span>
+                  </div>
+                  <div class="set">
+                    <span>Set: </span>
+                    <span class="sunset">8:31PM</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card moon">
+              <div class="subheader">
+                <span>MOONPHASE</span>
+              </div>
+              <hr />
+              <div class="card-body">
+                <div class="card-left">
+                  <div class="icon"></div>
+                  <span class="moonphase">Waxing Gibbous</span>
+                </div>
+                <div class="card-right">
+                  <span>This close to a full moon:</span>
+                  <span class="percentage">97.5%</span>
+                </div>
+              </div>
+            </div>
+            <div class="card look-ahead">
+              <div class="subheader">
+                <span>LOOK AHEAD</span>
+              </div>
+              <hr />
+              <div class="card-body">
+                <span class="look-ahead-description"
+                  >There will be storms a brewing these next few days, so get
+                  ready, get under, and get going. It's gonna be a bumpy
+                  ride.</span
+                >
               </div>
             </div>
           </div>
-          <div class="card sun">
-            <div class="subheader">
-              <span>SUN</span>
-            </div>
-            <hr />
-            <div class="card-body">
-              <div class="card-left">
-                <div class="icon"></div>
-                <span>UV Radiation: 13%</span>
-              </div>
-              <div class="card-right">
-                <div class="rise">
-                  <span>Rise: </span>
-                  <span class="sunrise">5:59AM</span>
-                </div>
-                <div class="set">
-                  <span>Set: </span>
-                  <span class="sunset">8:31PM</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card moon">
-            <div class="subheader">
-              <span>MOONPHASE</span>
-            </div>
-            <hr />
-            <div class="card-body">
-              <div class="card-left">
-                <div class="icon"></div>
-                <span class="moonphase">Waxing Gibbous</span>
-              </div>
-              <div class="card-right">
-                <span>This close to a full moon:</span>
-                <span class="percentage">97.5%</span>
-              </div>
-            </div>
-          </div>
-          <div class="card look-ahead">
-            <div class="subheader">
-              <span>LOOK AHEAD</span>
-            </div>
-            <hr />
-            <div class="card-body">
-              <span class="look-ahead-description"
-                >There will be storms a brewing these next few days, so get
-                ready, get under, and get going. It's gonna be a bumpy
-                ride.</span
-              >
-            </div>
-          </div>
-          <div class="card forecast">
+          <div class="column card forecast">
             <div class="subheader">
               <span>7-DAY WEATHER FORECAST</span>
             </div>

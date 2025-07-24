@@ -39,6 +39,8 @@ export class Controller {
         wind: currentWeatherData.windspeed,
         moon: currentWeatherData.moonphase,
         dateTime: currentWeatherData.datetime,
+        sunrise: currentWeatherData.sunrise,
+        sunset: currentWeatherData.sunset,
       });
 
       if (data.days.length >= NEXT_DAYS) {
@@ -58,6 +60,8 @@ export class Controller {
             moon: dayIdxData.moonphase,
             date: dayIdxData.datetime,
             description: dayIdxData.description,
+            sunrise: dayIdxData.sunrise,
+            sunset: dayIdxData.sunset,
           });
 
           days.push(weather);

@@ -9,6 +9,12 @@
     - Expose methods for updating display
  */
 
+//main page
 export class WeatherView {
   constructor() {}
+
+  createTemplate() {
+    const template = document.createElement("template");
+    template.innerHTML = ``;
+  }
 }

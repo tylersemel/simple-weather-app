@@ -60,6 +60,8 @@ class AbstractWeather {
     this.humidity = data.humidity;
     this.wind = data.wind;
     this.moon = new Moonphase(data.moon);
+    this.sunrise = data.sunrise;
+    this.sunset = data.sunset;
   }
 }
 
