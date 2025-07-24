@@ -8,3 +8,7 @@
     - Bind DOM events
     - Expose methods for updating display
  */
+
+export class WeatherView {
+  constructor() {}
+}
