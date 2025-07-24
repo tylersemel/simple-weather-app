@@ -44,34 +44,53 @@ class Moonphase {
   }
 }
 
-//for each day and the basic info about current weather
-export class Weather {
+class AbstractWeather {
   constructor(data) {
+    if (this.constructor == AbstractWeather) {
+      throw new Error(
+        "Cannot instantiate abstract class AbstractWeather directly.",
+      );
+    }
+
     this.feelsLike = data.feelsLike;
     this.temp = data.temp;
-    this.tempMin = data.tempMin;
-    this.tempMax = data.tempMax;
     this.conditions = data.conditions; //short description
     this.icon = data.icon;
     this.precipitation = data.precipitation;
     this.humidity = data.humidity;
     this.wind = data.wind;
     this.moon = new Moonphase(data.moon);
-    this.date = data.date;
-    this.dateTime = data.dateTime; //like 2PM
-    this.description = data.description; // long description for overall day
   }
 }
 
-export class WeatherForecast {
+//The current conditions
+class CurrentWeather extends AbstractWeather {
+  constructor(data) {
+    super(data);
+    this.dateTime = data.dateTime; //like 2PM
+  }
+}
+
+//The weather for the day
+class DailyWeather extends AbstractWeather {
+  constructor(data) {
+    super(data);
+    this.date = data.date;
+    this.description = data.description;
+    this.tempMin = data.tempMin;
+    this.tempMax = data.tempMax;
+  }
+}
+
+class WeatherForecast {
   UNITS = ["F", "C"];
-  currentUnit = this.UNITS[0];
 
   constructor(currentWeather, days, description, location) {
     this.currentWeather = currentWeather;
     this.days = days;
     this.description = description; //weekly description
     this.location = location;
+    this.currentUnit = this.UNITS[0];
   }
 
   toggleUnits() {
@@ -79,3 +98,5 @@ export class WeatherForecast {
       this.currentUnit == this.UNITS[0] ? this.UNITS[1] : this.UNITS[0];
   }
 }
+
+export { WeatherForecast, CurrentWeather, DailyWeather };
