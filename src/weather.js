@@ -1,18 +1,15 @@
 /**
  * **Purpose**: Manage application data and business rules
 
-**Responsibilities**:
-- Define data structures
-- Implement business logic
-- Validate data integrity
-- Provide data transformation methods
-- Handle data persistence
+  **Responsibilities**:
+  - Define data structures
+  - Implement business logic
+  - Validate data integrity
+  - Provide data transformation methods
+  - Handle data persistence
  */
 
 class Moonphase {
-  phase = "";
-  percentageUntilFull = "";
-
   constructor(moon) {
     this.setMoonphase(moon);
   }
@@ -49,55 +46,24 @@ class Moonphase {
 
 //for each day and the basic info about current weather
 export class Weather {
-  feelsLike = 0;
-  temp = 0;
-  tempMin = 0;
-  tempMax = 0;
-  conditions = ""; //short description
-  icon = "";
-  precipitation = 0;
-  humidity = 0;
-  wind = 0;
-  date = "";
-  dateTime = "";
-  description = ""; // long description for overall day
-
-  constructor(
-    feelsLike,
-    temp,
-    tempMin,
-    tempMax,
-    conditions,
-    icon,
-    precipitation,
-    humidity,
-    wind,
-    moon,
-    date,
-    dateTime,
-    description,
-  ) {
-    this.feelsLike = feelsLike;
-    this.temp = temp;
-    this.tempMin = tempMin;
-    this.tempMax = tempMax;
-    this.conditions = conditions;
-    this.icon = icon;
-    this.precipitation = precipitation;
-    this.humidity = humidity;
-    this.wind = wind;
-    this.moon = new Moonphase(moon);
-    this.date = date;
-    this.dateTime = dateTime; //like 2PM
-    this.description = description;
+  constructor(data) {
+    this.feelsLike = data.feelsLike;
+    this.temp = data.temp;
+    this.tempMin = data.tempMin;
+    this.tempMax = data.tempMax;
+    this.conditions = data.conditions; //short description
+    this.icon = data.icon;
+    this.precipitation = data.precipitation;
+    this.humidity = data.humidity;
+    this.wind = data.wind;
+    this.moon = new Moonphase(data.moon);
+    this.date = data.date;
+    this.dateTime = data.dateTime; //like 2PM
+    this.description = data.description; // long description for overall day
   }
 }
 
 export class WeatherForecast {
-  days = [];
-  location = "";
-  currentWeather;
-  description = "Look ahead";
   UNITS = ["F", "C"];
   currentUnit = this.UNITS[0];
 

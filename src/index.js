@@ -13,39 +13,45 @@ window.myfunc = async function createWeatherForecast(location) {
     let days = [];
     const currentWeatherData = data.currentConditions;
     //current weather wont have a max or min
-    let currentWeather = new Weather(
-      currentWeatherData.feelslike,
-      currentWeatherData.temp,
-      currentWeatherData.temp,
-      currentWeatherData.temp,
-      currentWeatherData.conditions,
-      currentWeatherData.icon,
-      currentWeatherData.precip,
-      currentWeatherData.humidity,
-      currentWeatherData.windspeed,
-      currentWeatherData.moonphase,
-      "Current Day",
-      currentWeatherData.dateTime,
-      data.days[0].description,
-    );
+    let curWeatherObj = {
+      feelsLike: currentWeatherData.feelslike,
+      temp: currentWeatherData.temp,
+      tempMin: null,
+      tempMax: null,
+      conditions: currentWeatherData.conditions,
+      icon: currentWeatherData.icon,
+      precipitation: currentWeatherData.precip,
+      humidity: currentWeatherData.humidity,
+      wind: currentWeatherData.windspeed,
+      moon: currentWeatherData.moonphase,
+      date: "Current Day",
+      dateTime: currentWeatherData.datetime,
+      description: data.days[0].description,
+    };
+
+    let currentWeather = new Weather(curWeatherObj);
 
     if (data.days.length >= NEXT_DAYS) {
       for (let i = 0; i < NEXT_DAYS; i++) {
-        let weather = new Weather(
-          data.days[i].feelslike,
-          data.days[i].temp,
-          data.days[i].tempmin,
-          data.days[i].tempmax,
-          data.days[i].conditions,
-          data.days[i].icon,
-          data.days[i].precip,
-          data.days[i].humidity,
-          data.days[i].windspeed,
-          data.days[i].moonphase,
-          data.days[i].datetime,
-          "",
-          data.days[i].description,
-        );
+        let dayIdxData = data.days[i];
+
+        let dataObj = {
+          feelsLike: dayIdxData.feelslike,
+          temp: dayIdxData.temp,
+          tempMin: dayIdxData.tempmin,
+          tempMax: dayIdxData.tempmax,
+          conditions: dayIdxData.conditions,
+          icon: dayIdxData.icon,
+          precipitation: dayIdxData.precip,
+          humidity: dayIdxData.humidity,
+          wind: dayIdxData.windspeed,
+          moon: dayIdxData.moonphase,
+          date: dayIdxData.datetime,
+          dateTime: null,
+          description: dayIdxData.description,
+        };
+
+        let weather = new Weather(dataObj);
 
         days.push(weather);
       }
