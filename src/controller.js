@@ -13,7 +13,8 @@ import { WeatherView } from "./view";
 
 export class Controller {
   constructor() {
-    this.view = new WeatherView();
+    this.rootContainer = document.querySelector(".root.container");
+    this.view = new WeatherView(this.rootContainer);
   }
 
   async createWeatherForecast(location) {
