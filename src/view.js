@@ -19,8 +19,6 @@ export class WeatherView {
 
     this.weatherCardsMain = this.createMain();
     this.mainContainer.appendChild(this.weatherCardsMain);
-
-    this.createCards();
   }
 
   //main
@@ -106,12 +104,12 @@ export class WeatherView {
 
     const todayBody = `<div class="lo-hi-temps">
         <div class="temp lo">
-          <div class="icon"></div>
+          <span>🌡️</span>
           <span>Lo:</span>
           <span class="lo-degree"></span>
         </div>
         <div class="temp hi">
-          <div class="icon"></div>
+          <span>🌡️</span>
           <span>Hi:</span>
           <span class="hi-degree"></span>
         </div>
@@ -131,7 +129,7 @@ export class WeatherView {
 
     const curWeatherBody = `<div class="card-left">
                   <div class="card-left-top">
-                    <div class="icon"></div>
+                    <img/>
                     <div class="current-degree-feel">
                       <div class="degree">
                         <span class="current-degrees">89°</span>
@@ -284,14 +282,11 @@ export class WeatherView {
     // const todayCard = todayItem.card;
 
     const todayCard = this.weatherCardsMain.querySelector(".card.today");
-    console.log(todayCard);
 
     const dateTime = todayCard.querySelector(".date");
     const lo = todayCard.querySelector(".lo-degree");
     const hi = todayCard.querySelector(".hi-degree");
     const description = todayCard.querySelector(".description");
-
-    console.log(weatherForecast);
 
     dateTime.textContent = weatherForecast.days[0].date; //need to convert
     lo.textContent =
@@ -301,10 +296,22 @@ export class WeatherView {
     description.textContent = weatherForecast.description;
   }
 
-  renderCurrentWeatherCard(weatherForecast) {
+  removeHyphensAndCapitalize(str) {
+    return str.replace(/-([a-z])/g, function (match, char) {
+      return char.toUpperCase();
+    });
+  }
+
+  async renderCurrentWeatherCard(weatherForecast) {
     const currentWeatherCard = this.weatherCardsMain.querySelector(
       ".card.current-weather",
     );
+
+    const icon = currentWeatherCard.querySelector("img");
+    icon.className = "icon";
+    console.log(icon);
+
+    // console.log(https://github.com/visualcrossing/WeatherIcons.git);
 
     const dateTimeElement = currentWeatherCard.querySelector(".time");
     const tempElement = currentWeatherCard.querySelector(".current-degrees");
@@ -314,6 +321,11 @@ export class WeatherView {
     const humidityElement = currentWeatherCard.querySelector(".humidity");
     const windElement = currentWeatherCard.querySelector(".windspeed");
 
+    let iconStr = weatherForecast.currentWeather.icon;
+    let svgModule = await import(`./assets/SVG/${iconStr}.svg`);
+
+    icon.src = svgModule.default;
+    icon.alt = "Weather icon";
     dateTimeElement.textContent = weatherForecast.currentWeather.dateTime;
     tempElement.textContent = weatherForecast.currentWeather.temp + "°";
     feelsLikeElement.textContent =

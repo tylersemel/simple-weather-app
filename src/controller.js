@@ -26,6 +26,7 @@ export class Controller {
       console.error("The forecast for that location is undefined.");
     }
 
+    this.view.createCards();
     this.view.render(this.forecast);
   }
 
