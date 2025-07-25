@@ -252,7 +252,7 @@ export class WeatherView {
                   </div>
                   <div class="hi-lo-temp">
                     <span class="hi"></span>
-                    <div class="space"></div>
+                    <div class="space">•</div>
                     <span class="lo"></span>
                   </div>
                   <div class="icon"></div>
@@ -269,6 +269,7 @@ export class WeatherView {
     this.renderSunCard(weatherForecast.currentWeather);
     this.renderMoonphaseCard(weatherForecast.currentWeather.moon);
     this.renderLookAheadCard(weatherForecast.description);
+    this.renderForecastCard(weatherForecast.days);
   }
 
   renderHeader(location) {
@@ -352,5 +353,34 @@ export class WeatherView {
     );
 
     descriptionElement.textContent = description;
+  }
+
+  renderForecastCard(days) {
+    const forecastCard = this.weatherCardsMain.querySelector(".card.forecast");
+    const nodeList = forecastCard.querySelectorAll(".day");
+    const dayDivs = Array.from(nodeList);
+
+    //might remove
+    if (days.length != dayDivs.length) {
+      console.error("The amount of divs is not equal to days.");
+    }
+
+    for (let i = 0; i < days.length; i++) {
+      let weekDay = dayDivs[i].querySelector(".week-day");
+      let monthDay = dayDivs[i].querySelector(".month-day");
+      let hi = dayDivs[i].querySelector(".hi");
+      let lo = dayDivs[i].querySelector(".lo");
+      // let icon = dayDivs[i].querySelector(".icon");
+      let description = dayDivs[i].querySelector(".description");
+      let precipitation = dayDivs[i].querySelector(".precipitation");
+
+      weekDay.textContent = i;
+      monthDay.textContent = i;
+      hi.textContent = days[i].tempMax;
+      lo.textContent = days[i].tempMin;
+      // icon.textContent = days[i].icon;
+      description.textContent = days[i].description;
+      precipitation.textContent = "💧" + days[i].precipitation + "%";
+    }
   }
 }
