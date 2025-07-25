@@ -15,6 +15,18 @@ export class Controller {
   constructor() {
     this.rootContainer = document.querySelector(".root.container");
     this.view = new WeatherView(this.rootContainer);
+
+    this.init("North Carolina");
+  }
+
+  async init(location) {
+    this.forecast = await this.createWeatherForecast(location);
+
+    if (!this.forecast) {
+      console.error("The forecast for that location is undefined.");
+    }
+
+    this.view.render(this.forecast);
   }
 
   async createWeatherForecast(location) {
@@ -42,6 +54,7 @@ export class Controller {
         dateTime: currentWeatherData.datetime,
         sunrise: currentWeatherData.sunrise,
         sunset: currentWeatherData.sunset,
+        uvindex: currentWeatherData.uvindex,
       });
 
       if (data.days.length >= NEXT_DAYS) {
@@ -63,6 +76,7 @@ export class Controller {
             description: dayIdxData.description,
             sunrise: dayIdxData.sunrise,
             sunset: dayIdxData.sunset,
+            uvindex: dayIdxData.uvindex,
           });
 
           days.push(weather);

@@ -62,6 +62,7 @@ class AbstractWeather {
     this.moon = new Moonphase(data.moon);
     this.sunrise = data.sunrise;
     this.sunset = data.sunset;
+    this.uvindex = data.uvindex;
   }
 }
 
@@ -92,12 +93,11 @@ class WeatherForecast {
     this.days = days;
     this.description = description; //weekly description
     this.location = location;
-    this.currentUnit = this.UNITS[0];
+    this.unit = this.UNITS[0];
   }
 
   toggleUnits() {
-    this.currentUnit =
-      this.currentUnit == this.UNITS[0] ? this.UNITS[1] : this.UNITS[0];
+    this.unit = this.unit == this.UNITS[0] ? this.UNITS[1] : this.UNITS[0];
   }
 }
 

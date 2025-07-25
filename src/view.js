@@ -62,8 +62,6 @@ export class WeatherView {
       card: this.createForecastCard(),
     });
 
-    console.log(this.leftCards[0]);
-
     for (let i = 0; i < this.leftCards.length; i++) {
       this.weatherCardsMain
         .querySelector(".left-cards")
@@ -104,25 +102,22 @@ export class WeatherView {
 
   createTodayCard() {
     const todayHeader = `<span>TODAY'S WEATHER</span>
-        <span class="date">WED, JUN 11</span>`;
+        <span class="date"></span>`;
 
     const todayBody = `<div class="lo-hi-temps">
         <div class="temp lo">
-          <!-- Icon space here -->
           <div class="icon"></div>
           <span>Lo:</span>
-          <span class="lo-degree">12°F</span>
+          <span class="lo-degree"></span>
         </div>
         <div class="temp hi">
           <div class="icon"></div>
           <span>Hi:</span>
-          <span class="hi-degree">56°F</span>
+          <span class="hi-degree"></span>
         </div>
       </div>
       <div class="description">
-        <span>
-          Partly cloudy throughout the day with early morning rain.
-        </span>
+        <span></span>
       </div>`;
 
     const todayCard = this.createCard(todayHeader, todayBody, "today");
@@ -186,7 +181,8 @@ export class WeatherView {
     const sunSubheader = `<span>SUN</span>`;
     const sunBody = `<div class="card-left">
                   <div class="icon"></div>
-                  <span>UV Radiation: 13%</span>
+                  <span>UV Index:</span>
+                  <span class="uv">13%</span>
                 </div>
                 <div class="card-right">
                   <div class="rise">
@@ -236,7 +232,7 @@ export class WeatherView {
     const subheader = `<span>7-DAY WEATHER FORECAST</span>`;
     let body = ``;
     for (let i = 0; i < 7; i++) {
-      body += this.createForecastDay();
+      body += this.#createForecastDay();
 
       if (i != 6) {
         body += `<hr />`;
@@ -248,7 +244,7 @@ export class WeatherView {
     return forecastCard;
   }
 
-  createForecastDay() {
+  #createForecastDay() {
     const day = `<div class="day">
                   <div class="date">
                     <span class="week-day"></span>
@@ -268,7 +264,11 @@ export class WeatherView {
 
   render(weatherForecast) {
     this.renderHeader(weatherForecast.location);
-    this.renderCards(weatherForecast);
+    this.renderTodayCard(weatherForecast);
+    this.renderCurrentWeatherCard(weatherForecast);
+    this.renderSunCard(weatherForecast.currentWeather);
+    this.renderMoonphaseCard(weatherForecast.currentWeather.moon);
+    this.renderLookAheadCard(weatherForecast.description);
   }
 
   renderHeader(location) {
@@ -277,72 +277,80 @@ export class WeatherView {
     currentLocationElement.textContent = location;
   }
 
-  // renderCards(weatherForecast) {
-  //   renderTodayCard(weatherForecast);
-  // }
+  renderTodayCard(weatherForecast) {
+    //getting the elements of the card that need to be filled with current weather data
+    // const todayItem = this.leftCards.find((item) => item.title == "today");
+    // const todayCard = todayItem.card;
 
-  // renderTodayCard(weatherForecast) {}
+    const todayCard = this.weatherCardsMain.querySelector(".card.today");
+    console.log(todayCard);
 
-  // function setTodaysWeatherCard(date, tempMin, tempMax, description, unit) {
-  //   //getting the elements of the card that need to be filled with current weather data
-  //   const todayCard = mainContainer.querySelector(".card.today");
-  //   const dateTimeElement = todayCard.querySelector(".date");
-  //   const loElement = todayCard.querySelector(".lo-degree");
-  //   const hiElement = todayCard.querySelector(".hi-degree");
-  //   const descriptionElement = todayCard.querySelector(".description");
+    const dateTime = todayCard.querySelector(".date");
+    const lo = todayCard.querySelector(".lo-degree");
+    const hi = todayCard.querySelector(".hi-degree");
+    const description = todayCard.querySelector(".description");
 
-  //   //some of these things need to be changed to fit a format
-  //   dateTimeElement.textContent = date;
-  //   loElement.textContent = tempMin + "°" + unit;
-  //   hiElement.textContent = tempMax + "°" + unit;
-  //   descriptionElement.textContent = description;
-  // }
+    console.log(weatherForecast);
 
-  // function setCurrentWeatherCard(
-  //   dateTime,
-  //   temp,
-  //   feelsLike,
-  //   conditions,
-  //   precipitation,
-  //   humidity,
-  //   wind,
-  //   unit,
-  // ) {
-  //   const currentWeatherCard = mainContainer.querySelector(
-  //     ".card.current-weather",
-  //   );
-  //   const dateTimeElement = currentWeatherCard.querySelector(".time");
-  //   const tempElement = currentWeatherCard.querySelector(".current-degrees");
-  //   const feelsLikeElement = currentWeatherCard.querySelector(".feels-like");
-  //   const conditionsElement = currentWeatherCard.querySelector(".conditions");
-  //   const precipElement = currentWeatherCard.querySelector(".precipitation");
-  //   const humidityElement = currentWeatherCard.querySelector(".humidity");
-  //   const windElement = currentWeatherCard.querySelector(".windspeed");
+    dateTime.textContent = weatherForecast.days[0].date; //need to convert
+    lo.textContent =
+      weatherForecast.days[0].tempMin + "°" + weatherForecast.unit;
+    hi.textContent =
+      weatherForecast.days[0].tempMax + "°" + weatherForecast.unit;
+    description.textContent = weatherForecast.description;
+  }
 
-  //   dateTimeElement.textContent = dateTime;
-  //   tempElement.textContent = temp + "°";
-  //   feelsLikeElement.textContent = feelsLike + "°" + unit;
-  //   conditionsElement.textContent = conditions;
-  //   precipElement.textContent = precipitation + "%";
-  //   humidityElement.textContent = humidity + "%";
-  //   windElement.textContent = wind + " MPH";
-  // }
+  renderCurrentWeatherCard(weatherForecast) {
+    const currentWeatherCard = this.weatherCardsMain.querySelector(
+      ".card.current-weather",
+    );
 
-  // function setLookAheadCard(description) {
-  //   const lookAheadCard = mainContainer.querySelector(".card.look-ahead");
-  //   const descriptionElement = lookAheadCard.querySelector(
-  //     ".look-ahead-description",
-  //   );
+    const dateTimeElement = currentWeatherCard.querySelector(".time");
+    const tempElement = currentWeatherCard.querySelector(".current-degrees");
+    const feelsLikeElement = currentWeatherCard.querySelector(".feels-like");
+    const conditionsElement = currentWeatherCard.querySelector(".conditions");
+    const precipElement = currentWeatherCard.querySelector(".precipitation");
+    const humidityElement = currentWeatherCard.querySelector(".humidity");
+    const windElement = currentWeatherCard.querySelector(".windspeed");
 
-  //   descriptionElement.textContent = description;
-  // }
+    dateTimeElement.textContent = weatherForecast.currentWeather.dateTime;
+    tempElement.textContent = weatherForecast.currentWeather.temp + "°";
+    feelsLikeElement.textContent =
+      weatherForecast.currentWeather.feelsLike + "°" + weatherForecast.unit;
+    conditionsElement.textContent = weatherForecast.currentWeather.conditions;
+    precipElement.textContent =
+      weatherForecast.currentWeather.precipitation + "%";
+    humidityElement.textContent = weatherForecast.currentWeather.humidity + "%";
+    windElement.textContent = weatherForecast.currentWeather.wind + " MPH";
+  }
 
-  // function setMoonphaseCard(phase, percentageUnilFull) {
-  //   const moonphaseCard = mainContainer.querySelector(".card.moon");
-  //   const phaseElement = moonphaseCard.querySelector(".moonphase");
-  //   const percentageElement = moonphaseCard.querySelector(".percentage");
+  renderSunCard(currentWeather) {
+    const sunCard = this.weatherCardsMain.querySelector(".card.sun");
+    const uvRadiation = sunCard.querySelector(".uv");
+    const sunrise = sunCard.querySelector(".sunrise");
+    const sunset = sunCard.querySelector(".sunset");
 
-  //   phaseElement.textContent = phase;
-  //   percentageElement.textContent = percentageUnilFull;
-  // }
+    uvRadiation.textContent = currentWeather.uvindex;
+    sunrise.textContent = currentWeather.sunrise + " a.m.";
+    sunset.textContent = currentWeather.sunset + " p.m.";
+  }
+
+  renderMoonphaseCard(moon) {
+    const moonphaseCard = this.weatherCardsMain.querySelector(".card.moon");
+    const phaseElement = moonphaseCard.querySelector(".moonphase");
+    const percentageElement = moonphaseCard.querySelector(".percentage");
+
+    phaseElement.textContent = moon.phase;
+    percentageElement.textContent = moon.percentageUntilFull;
+  }
+
+  renderLookAheadCard(description) {
+    const lookAheadCard =
+      this.weatherCardsMain.querySelector(".card.look-ahead");
+    const descriptionElement = lookAheadCard.querySelector(
+      ".look-ahead-description",
+    );
+
+    descriptionElement.textContent = description;
+  }
 }
