@@ -309,9 +309,6 @@ export class WeatherView {
 
     const icon = currentWeatherCard.querySelector("img");
     icon.className = "icon";
-    console.log(icon);
-
-    // console.log(https://github.com/visualcrossing/WeatherIcons.git);
 
     const dateTimeElement = currentWeatherCard.querySelector(".time");
     const tempElement = currentWeatherCard.querySelector(".current-degrees");
@@ -348,11 +345,21 @@ export class WeatherView {
     sunset.textContent = currentWeather.sunset + " p.m.";
   }
 
-  renderMoonphaseCard(moon) {
+  async renderMoonphaseCard(moon) {
     const moonphaseCard = this.weatherCardsMain.querySelector(".card.moon");
     const phaseElement = moonphaseCard.querySelector(".moonphase");
     const percentageElement = moonphaseCard.querySelector(".percentage");
+    const icon = moonphaseCard.querySelector(".icon");
+    // const iconStr = m
+    const iconImg = new Image();
 
+    let moonphasesModule = await import(
+      `./assets/moonphases/${moon.phase}.png`
+    );
+
+    iconImg.src = moonphasesModule.default;
+    iconImg.className = "moon-img";
+    icon.appendChild(iconImg);
     phaseElement.textContent = moon.phase;
     percentageElement.textContent = moon.percentageUntilFull;
   }

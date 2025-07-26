@@ -25,21 +25,21 @@ class Moonphase {
     this.percentageUntilFull = String(product) + "%";
 
     if (amount == 0) {
-      this.phase = "New Moon";
+      this.phase = "new-moon";
     } else if (amount > 0 && amount < 0.25) {
-      this.phase = "Waxing Crescent";
+      this.phase = "waxing-crescent";
     } else if (amount == 0.25) {
-      this.phase = "First Quarter";
+      this.phase = "first-quarter";
     } else if (amount > 0.25 && amount < 0.5) {
-      this.phase = "Waxing Gibbous";
+      this.phase = "waxing-gibbous";
     } else if (amount == 0.5) {
-      this.phase = "Full Moon";
+      this.phase = "full-moon";
     } else if (amount > 0.5 && amount < 0.75) {
-      this.phase = "Waning Gibbous";
+      this.phase = "waning-gibbous";
     } else if (amount == 0.75) {
-      this.phase = "Last Quarter";
+      this.phase = "third-quarter";
     } else {
-      this.phase = "Waning Crescent";
+      this.phase = "waning-crescent";
     }
   }
 }
