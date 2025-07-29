@@ -9,6 +9,8 @@
     - Expose methods for updating display
  */
 
+import { parse, format } from "date-fns";
+
 //main page
 export class WeatherView {
   constructor(container) {
@@ -289,7 +291,9 @@ export class WeatherView {
     const hi = todayCard.querySelector(".hi-degree");
     const description = todayCard.querySelector(".description");
 
-    dateTime.textContent = weatherForecast.days[0].date; //need to convert
+    let date = parse(weatherForecast.days[0].date, "yyyy-MM-dd", new Date());
+
+    dateTime.textContent = format(date, "eee, MMM dd");
     lo.textContent =
       weatherForecast.days[0].tempMin + "°" + weatherForecast.unit;
     hi.textContent =
@@ -319,12 +323,14 @@ export class WeatherView {
     const humidityElement = currentWeatherCard.querySelector(".humidity");
     const windElement = currentWeatherCard.querySelector(".windspeed");
 
+    let date = new Date();
+
     let iconStr = weatherForecast.currentWeather.icon;
     let svgModule = await import(`./assets/SVG/${iconStr}.svg`);
 
     icon.src = svgModule.default;
     icon.alt = "Weather icon";
-    dateTimeElement.textContent = weatherForecast.currentWeather.dateTime;
+    dateTimeElement.textContent = format(date, "h:mm aa");
     tempElement.textContent = weatherForecast.currentWeather.temp + "°";
     feelsLikeElement.textContent =
       weatherForecast.currentWeather.feelsLike + "°" + weatherForecast.unit;
@@ -342,8 +348,22 @@ export class WeatherView {
     const sunset = sunCard.querySelector(".sunset");
 
     uvRadiation.textContent = currentWeather.uvindex;
-    sunrise.textContent = currentWeather.sunrise + " a.m.";
-    sunset.textContent = currentWeather.sunset + " p.m.";
+
+    let sunriseTime = parse(
+      currentWeather.sunrise.split(":", 2).join(":"),
+      "HH:mm",
+      new Date(),
+    );
+
+    sunrise.textContent = format(sunriseTime, "h:mm a");
+
+    let sunsetTime = parse(
+      currentWeather.sunset.split(":", 2).join(":"),
+      "HH:mm",
+      new Date(),
+    );
+
+    sunset.textContent = format(sunsetTime, "h:mm a");
   }
 
   async renderMoonphaseCard(moon) {
@@ -351,7 +371,6 @@ export class WeatherView {
     const phaseElement = moonphaseCard.querySelector(".moonphase");
     const percentageElement = moonphaseCard.querySelector(".percentage");
     const icon = moonphaseCard.querySelector(".icon");
-    // const iconStr = m
     const iconImg = new Image();
 
     let moonphasesModule = await import(
@@ -390,22 +409,24 @@ export class WeatherView {
       let description = dayDivs[i].querySelector(".description");
       let precipitation = dayDivs[i].querySelector(".precipitation");
 
-      weekDay.textContent = "MON";
-      monthDay.textContent = days[i].date;
       hi.textContent = days[i].tempMax;
       lo.textContent = days[i].tempMin;
       description.textContent = days[i].description;
-      precipitation.textContent = "💧" + days[i].precipitation + "%";
+      precipitation.textContent =
+        "💧" + (days[i].precipitation * 100).toFixed(0) + "%";
 
       const icon = dayDivs[i].querySelector(".icon");
       const iconImg = new Image();
-
       let svgModule = await import(`./assets/SVG/${days[i].icon}.svg`);
-
       iconImg.src = svgModule.default;
       iconImg.className = "day-img";
       iconImg.alt = "Icon";
       icon.appendChild(iconImg);
+
+      let date = parse(days[i].date, "yyyy-MM-dd", new Date());
+      weekDay.textContent = format(date, "eee");
+
+      monthDay.textContent = format(date, "MM/dd");
     }
   }
 }
