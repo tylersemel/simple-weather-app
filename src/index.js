@@ -6,4 +6,4 @@ const controller = new Controller();
 // const forecast = await controller.createWeatherForecast(
 //   "San Diego, California",
 // );
-// console.log(forecast);
+console.log(controller);

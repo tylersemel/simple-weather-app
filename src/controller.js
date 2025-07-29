@@ -16,7 +16,7 @@ export class Controller {
     this.rootContainer = document.querySelector(".root.container");
     this.view = new WeatherView(this.rootContainer);
 
-    this.init("North Carolina");
+    this.init("Cary, North Carolina");
   }
 
   async init(location) {

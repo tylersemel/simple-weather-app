@@ -616,11 +616,16 @@ input[type="text"] {
   width: 100%;
 }
 
+.card.forecast .card-body .day .hi-lo-temp {
+  padding: 5px;
+  gap: 2px;
+}
+
 .card.forecast .card-body .day {
   padding: 5px 5px;
 
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 5fr 1fr;
+  grid-template-columns: 70px 40px 100px 5fr 1fr;
   width: 100%;
   align-items: center;
   justify-content: space-between;
@@ -637,7 +642,7 @@ input[type="text"] {
 .card.forecast .card-body .day .icon {
   height: 40px;
   width: 40px;
-  background-color: rgb(146, 146, 146);
+  /* background-color: rgb(146, 146, 146); */
   border-radius: 50%;
   justify-self: right;
   margin-right: 0.5rem;
@@ -663,6 +668,19 @@ input[type="text"] {
   justify-content: space-between;
   align-items: center;
   width: fit-content;
+}
+
+.card.forecast .card-body .day .week-day {
+  font-weight: bold;
+}
+
+.card.forecast .card-body .day .hi {
+  font-weight: bold;
+  /* font-size: 24px; */
+}
+
+.card.forecast .card-body .day .lo {
+  /* font-size: 18px; */
 }
 
 .card-forecast span {
