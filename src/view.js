@@ -14,14 +14,32 @@ import { parse, format } from "date-fns";
 //main page
 export class WeatherView {
   constructor(container) {
-    console.log("here");
     this.container = container;
+
+    // this.init();
+  }
+
+  init() {
     this.header = this.container.querySelector(".header");
     this.mainContainer = this.container.querySelector(".main-container");
+    this.mainContainer.innerHTML = "";
 
     this.weatherCardsMain = this.createMain();
     this.mainContainer.appendChild(this.weatherCardsMain);
+    this.locationSearchForm = this.container.querySelector(
+      ".location-search form",
+    );
+
+    // this.setListeners();
   }
+
+  // setListeners() {
+  //   this.locationSearchForm.addEventListener("submit", (e) => {
+  //     e.preventDefault();
+  //     const data = new FormData(e.target);
+  //     console.log(data.get("location"));
+  //   });
+  // }
 
   //main
   createMain() {
@@ -258,7 +276,10 @@ export class WeatherView {
                   </div>
                   
                   <div class="description"></div>
-                  <div class="precipitation"></div>
+                  <div class="precipitation">
+                    <img/>
+                    <span></span>
+                  </div>
                 </div>`;
     return day;
   }
@@ -400,6 +421,7 @@ export class WeatherView {
     const forecastCard = this.weatherCardsMain.querySelector(".card.forecast");
     const nodeList = forecastCard.querySelectorAll(".day");
     const dayDivs = Array.from(nodeList);
+    const raindrop = await import("./assets/SVG/raindrop-drop-svgrepo-com.svg");
 
     for (let i = 0; i < days.length; i++) {
       let weekDay = dayDivs[i].querySelector(".week-day");
@@ -407,13 +429,17 @@ export class WeatherView {
       let hi = dayDivs[i].querySelector(".hi");
       let lo = dayDivs[i].querySelector(".lo");
       let description = dayDivs[i].querySelector(".description");
-      let precipitation = dayDivs[i].querySelector(".precipitation");
+      let precipitation = dayDivs[i].querySelector(".precipitation span");
 
-      hi.textContent = days[i].tempMax;
-      lo.textContent = days[i].tempMin;
-      description.textContent = days[i].description;
+      hi.textContent = days[i].tempMax.toFixed(0) + "°";
+      lo.textContent = days[i].tempMin.toFixed(0) + "°";
+      description.textContent = days[i].conditions;
+
+      let raindropImg = dayDivs[i].querySelector(".precipitation img");
+      raindropImg.src = raindrop.default;
+      raindropImg.alt = "A raindrop";
       precipitation.textContent =
-        "💧" + (days[i].precipitation * 100).toFixed(0) + "%";
+        (days[i].precipitation * 100).toFixed(0) + "%";
 
       const icon = dayDivs[i].querySelector(".icon");
       const iconImg = new Image();

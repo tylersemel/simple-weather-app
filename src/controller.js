@@ -16,7 +16,7 @@ export class Controller {
     this.rootContainer = document.querySelector(".root.container");
     this.view = new WeatherView(this.rootContainer);
 
-    this.init("Cary, North Carolina");
+    // this.init("Cary, North Carolina");
   }
 
   async init(location) {
@@ -26,8 +26,19 @@ export class Controller {
       console.error("The forecast for that location is undefined.");
     }
 
+    this.view.init();
     this.view.createCards();
     this.view.render(this.forecast);
+    this.setViewListeners();
+  }
+
+  setViewListeners() {
+    this.view.locationSearchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(e.target);
+      // console.log(data.get("location"));
+      this.init(data.get("location"));
+    });
   }
 
   async createWeatherForecast(location) {

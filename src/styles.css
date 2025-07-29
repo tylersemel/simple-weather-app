@@ -429,7 +429,7 @@ input[type="text"] {
 .card.current-weather .icon {
   width: 80px;
   height: 80px;
-  border-radius: 50%;
+  /* border-radius: 50%; */
 }
 
 .card.current-weather .card-body {
@@ -539,7 +539,6 @@ input[type="text"] {
 .card.sun .card-body {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 30px;
@@ -611,24 +610,20 @@ input[type="text"] {
   justify-content: center;
 }
 
-.card.forecast .card-body {
-  /* padding: 0; */
-  width: 100%;
-}
-
 .card.forecast .card-body .day .hi-lo-temp {
   padding: 5px;
   gap: 2px;
 }
 
 .card.forecast .card-body .day {
-  padding: 5px 5px;
+  /* padding: 5px 5px; */
 
   display: grid;
-  grid-template-columns: 70px 40px 100px 5fr 1fr;
+  grid-template-columns: 0.7fr 0.5fr 1fr 2fr 1fr;
   width: 100%;
   align-items: center;
   justify-content: space-between;
+  /* gap: 20px; */
 }
 
 .card.forecast .card-body .day:first-child {
@@ -642,14 +637,14 @@ input[type="text"] {
 .card.forecast .card-body .day .icon {
   height: 40px;
   width: 40px;
-  /* background-color: rgb(146, 146, 146); */
-  border-radius: 50%;
-  justify-self: right;
-  margin-right: 0.5rem;
 }
 
 .card.forecast .card-body .day .precipitation {
-  text-align: right;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  gap: 3px;
 }
 
 .card.forecast .card-body hr {
@@ -692,4 +687,9 @@ input[type="text"] {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.card.forecast .card-body .day .precipitation img {
+  height: 20px;
+  width: 20px;
 }
