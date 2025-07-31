@@ -116,7 +116,7 @@ class WeatherForecast {
     );
 
     const data = await response.json();
-    // console.log(data);
+    console.log(data);
 
     try {
       const NEXT_DAYS = 7;

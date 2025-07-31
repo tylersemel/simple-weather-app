@@ -10,4 +10,4 @@ class App {
 }
 
 const app = new App();
-await app.controller.init("Cary, North Carolina");
+await app.controller.init("United States");
