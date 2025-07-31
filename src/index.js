@@ -1,6 +1,6 @@
 import "./styles.css";
 import { ForecastController } from "./controller.js";
-import { ForecastView } from "./view.js";
+import { ForecastView } from "./weather-view.js";
 
 class App {
   constructor() {
