@@ -1,5 +1,6 @@
 import { WeatherForecast } from "./weather";
 
+//singleton
 export class ForecastController {
   constructor(model, view) {
     this.setModel(model);

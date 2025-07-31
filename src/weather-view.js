@@ -5,6 +5,7 @@ export class ForecastView {
     this.rootContainer = document.querySelector(".root.container");
     this.header = this.rootContainer.querySelector(".header");
     this.mainContainer = this.rootContainer.querySelector(".main-container");
+    this.isHomeState = true;
 
     this.init();
     // this.disableButton(this.celsiusBtn);
@@ -17,9 +18,21 @@ export class ForecastView {
     }
   }
 
+  showForecastLayout() {
+    this.mainContainer.classList.remove("home-layout");
+    this.isHomeState = false;
+  }
+
+  showHomeLayout() {
+    this.mainContainer.classList.add("home-layout");
+    this.isHomeState = true;
+  }
+
   init() {
     this.mainContainer.innerHTML = "";
+    this.header.innerHTML = "";
 
+    this.createHeader();
     this.weatherCardsMain = this.createMain();
     this.mainContainer.appendChild(this.weatherCardsMain);
     this.createCards();
@@ -29,6 +42,31 @@ export class ForecastView {
     );
     this.fahrenheitBtn = this.weatherCardsMain.querySelector("#fahrenheit");
     this.celsiusBtn = this.weatherCardsMain.querySelector("#celsius");
+  }
+
+  createHeader() {
+    this.header.innerHTML = `<div class="header-items">
+          <div class="location-display">
+            <span>Weather in</span>
+            <span class="current-location">San Jose, CA</span>
+          </div>
+          <div class="location-search">
+            <search>
+              <form action="">
+                <p>
+                  <label for="location">&#x1F50D;&#xFE0E;</label>
+                  <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    placeholder="Enter a location"
+                  />
+                </p>
+                <button type="submit">SEARCH</button>
+              </form>
+            </search>
+          </div>
+        </div>`;
   }
 
   //main
@@ -433,8 +471,7 @@ export class ForecastView {
       let raindropImg = dayDivs[i].querySelector(".precipitation img");
       raindropImg.src = raindrop.default;
       raindropImg.alt = "A raindrop";
-      precipitation.textContent =
-        (days[i].precipitation * 100).toFixed(0) + "%";
+      precipitation.textContent = days[i].precipitation + "%";
 
       const icon = dayDivs[i].querySelector(".icon");
       const iconImg = new Image();
