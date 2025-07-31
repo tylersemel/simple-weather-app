@@ -1,45 +1,35 @@
-/**
- *  **Purpose**: Handle all visual representation and DOM manipulation
-
-    **Responsibilities**:
-    - Create and update DOM elements
-    - Apply CSS classes and styles
-    - Handle animations
-    - Bind DOM events
-    - Expose methods for updating display
- */
-
 import { parse, format } from "date-fns";
 
-//main page
-export class WeatherView {
-  constructor(container) {
-    this.container = container;
+export class ForecastView {
+  constructor() {
+    this.rootContainer = document.querySelector(".root.container");
+    this.header = this.rootContainer.querySelector(".header");
+    this.mainContainer = this.rootContainer.querySelector(".main-container");
 
-    // this.init();
+    this.init();
+    // this.disableButton(this.celsiusBtn);
+  }
+
+  //may not need
+  setController(controller) {
+    if (!this.controller) {
+      this.controller = controller;
+    }
   }
 
   init() {
-    this.header = this.container.querySelector(".header");
-    this.mainContainer = this.container.querySelector(".main-container");
     this.mainContainer.innerHTML = "";
 
     this.weatherCardsMain = this.createMain();
     this.mainContainer.appendChild(this.weatherCardsMain);
-    this.locationSearchForm = this.container.querySelector(
+    this.createCards();
+
+    this.locationSearchForm = this.rootContainer.querySelector(
       ".location-search form",
     );
-
-    // this.setListeners();
+    this.fahrenheitBtn = this.weatherCardsMain.querySelector("#fahrenheit");
+    this.celsiusBtn = this.weatherCardsMain.querySelector("#celsius");
   }
-
-  // setListeners() {
-  //   this.locationSearchForm.addEventListener("submit", (e) => {
-  //     e.preventDefault();
-  //     const data = new FormData(e.target);
-  //     console.log(data.get("location"));
-  //   });
-  // }
 
   //main
   createMain() {
@@ -292,6 +282,7 @@ export class WeatherView {
     this.renderMoonphaseCard(weatherForecast.currentWeather.moon);
     this.renderLookAheadCard(weatherForecast.description);
     this.renderForecastCard(weatherForecast.days);
+    this.setupCss(weatherForecast);
   }
 
   renderHeader(location) {
@@ -315,10 +306,11 @@ export class WeatherView {
     let date = parse(weatherForecast.days[0].date, "yyyy-MM-dd", new Date());
 
     dateTime.textContent = format(date, "eee, MMM dd");
+
     lo.textContent =
-      weatherForecast.days[0].tempMin + "°" + weatherForecast.unit;
+      weatherForecast.days[0].tempMin.toFixed(0) + "°" + weatherForecast.unit;
     hi.textContent =
-      weatherForecast.days[0].tempMax + "°" + weatherForecast.unit;
+      weatherForecast.days[0].tempMax.toFixed(0) + "°" + weatherForecast.unit;
     description.textContent = weatherForecast.description;
   }
 
@@ -352,9 +344,12 @@ export class WeatherView {
     icon.src = svgModule.default;
     icon.alt = "Weather icon";
     dateTimeElement.textContent = format(date, "h:mm aa");
-    tempElement.textContent = weatherForecast.currentWeather.temp + "°";
+    tempElement.textContent =
+      weatherForecast.currentWeather.temp.toFixed(0) + "°";
     feelsLikeElement.textContent =
-      weatherForecast.currentWeather.feelsLike + "°" + weatherForecast.unit;
+      weatherForecast.currentWeather.feelsLike.toFixed(0) +
+      "°" +
+      weatherForecast.unit;
     conditionsElement.textContent = weatherForecast.currentWeather.conditions;
     precipElement.textContent =
       weatherForecast.currentWeather.precipitation + "%";
@@ -452,7 +447,34 @@ export class WeatherView {
       let date = parse(days[i].date, "yyyy-MM-dd", new Date());
       weekDay.textContent = format(date, "eee");
 
-      monthDay.textContent = format(date, "MM/dd");
+      monthDay.textContent = format(date, "M/dd");
     }
+  }
+
+  disableButton(button) {
+    //disable button and change color to gray
+    button.style.color = "black";
+    button.style.cursor = "default";
+    button.disabled = true;
+  }
+
+  enableButton(button) {
+    button.style.color = "gray";
+    button.style.cursor = "pointer";
+    button.disabled = false;
+  }
+
+  //some css depends on the model's data
+  setupCss(weatherForecast) {
+    const toEnable =
+      weatherForecast.unit == weatherForecast.UNITS[0]
+        ? this.celsiusBtn
+        : this.fahrenheitBtn;
+
+    const toDisable =
+      toEnable == this.fahrenheitBtn ? this.celsiusBtn : this.fahrenheitBtn;
+
+    this.enableButton(toEnable);
+    this.disableButton(toDisable);
   }
 }

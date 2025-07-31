@@ -1,108 +1,58 @@
-/*
-**Purpose**: Coordinate between Models and Views
+import { WeatherForecast } from "./weather";
 
-**Responsibilities**:
-- Handle user input
-- Implement application logic
-- Update models based on user actions
-- Update views when data changes
-- Manage application flow
-*/
-import { WeatherForecast, CurrentWeather, DailyWeather } from "./weather.js";
-import { WeatherView } from "./view";
-
-export class Controller {
-  constructor() {
-    this.rootContainer = document.querySelector(".root.container");
-    this.view = new WeatherView(this.rootContainer);
-
-    // this.init("Cary, North Carolina");
+export class ForecastController {
+  constructor(model, view) {
+    this.setModel(model);
+    this.view = view;
+    this.view.setController(this);
   }
 
   async init(location) {
-    this.forecast = await this.createWeatherForecast(location);
+    const model = await WeatherForecast.create(location);
 
-    if (!this.forecast) {
-      console.error("The forecast for that location is undefined.");
+    if (!model) {
+      return;
     }
 
-    this.view.init();
-    this.view.createCards();
-    this.view.render(this.forecast);
-    this.setViewListeners();
+    this.setModel(model);
+    this.updateView(model);
   }
 
-  setViewListeners() {
+  setModel(model) {
+    this.model = model;
+  }
+
+  updateView(model) {
+    this.view.init();
+    this.view.render(model);
+    this.setupEventListeners();
+  }
+
+  setupEventListeners() {
     this.view.locationSearchForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      const data = new FormData(e.target);
-      // console.log(data.get("location"));
-      this.init(data.get("location"));
+      const location = new FormData(e.target).get("location");
+      this.handleSearch(location);
     });
-  }
 
-  async createWeatherForecast(location) {
-    const response = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=98L2K2WD536Q949XYA4B3W424`,
+    this.view.fahrenheitBtn.addEventListener("click", () =>
+      this.handleToggleUnits(),
     );
 
-    const data = await response.json();
-    console.log(data);
+    this.view.celsiusBtn.addEventListener("click", () =>
+      this.handleToggleUnits(),
+    );
+  }
 
-    try {
-      const NEXT_DAYS = 7;
-      let days = [];
-      const currentWeatherData = data.currentConditions;
+  async handleSearch(location) {
+    const model = await WeatherForecast.create(location);
+    this.setModel(model);
+    this.updateView(model);
+  }
 
-      let currentWeather = new CurrentWeather({
-        feelsLike: currentWeatherData.feelslike,
-        temp: currentWeatherData.temp,
-        conditions: currentWeatherData.conditions,
-        icon: currentWeatherData.icon,
-        precipitation: currentWeatherData.precip,
-        humidity: currentWeatherData.humidity,
-        wind: currentWeatherData.windspeed,
-        moon: currentWeatherData.moonphase,
-        dateTime: currentWeatherData.datetime,
-        sunrise: currentWeatherData.sunrise,
-        sunset: currentWeatherData.sunset,
-        uvindex: currentWeatherData.uvindex,
-      });
+  handleToggleUnits() {
+    this.model.toggleUnits();
 
-      if (data.days.length >= NEXT_DAYS) {
-        for (let i = 0; i < NEXT_DAYS; i++) {
-          let dayIdxData = data.days[i];
-
-          let weather = new DailyWeather({
-            feelsLike: dayIdxData.feelslike,
-            temp: dayIdxData.temp,
-            tempMin: dayIdxData.tempmin,
-            tempMax: dayIdxData.tempmax,
-            conditions: dayIdxData.conditions,
-            icon: dayIdxData.icon,
-            precipitation: dayIdxData.precip,
-            humidity: dayIdxData.humidity,
-            wind: dayIdxData.windspeed,
-            moon: dayIdxData.moonphase,
-            date: dayIdxData.datetime,
-            description: dayIdxData.description,
-            sunrise: dayIdxData.sunrise,
-            sunset: dayIdxData.sunset,
-            uvindex: dayIdxData.uvindex,
-          });
-
-          days.push(weather);
-        }
-      }
-
-      return new WeatherForecast(
-        currentWeather,
-        days,
-        data.description,
-        data.address,
-      );
-    } catch (err) {
-      console.error(err);
-    }
+    this.updateView(this.model);
   }
 }

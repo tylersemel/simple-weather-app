@@ -1,12 +1,13 @@
 import "./styles.css";
-import { Controller } from "./controller.js";
+import { ForecastController } from "./controller.js";
+import { ForecastView } from "./view.js";
 
-const controller = new Controller();
+class App {
+  constructor() {
+    this.view = new ForecastView();
+    this.controller = new ForecastController(null, this.view);
+  }
+}
 
-// const forecast = await controller.createWeatherForecast(
-//   "San Diego, California",
-// );
-
-controller.init("Cary, North Carolina");
-
-// console.log(controller);
+const app = new App();
+await app.controller.init("Cary, North Carolina");
