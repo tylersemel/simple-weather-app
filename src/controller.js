@@ -32,7 +32,11 @@ export class ForecastController {
     this.view.locationSearchForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const location = new FormData(e.target).get("location");
-      this.handleSearch(location);
+      try {
+        this.handleSearch(location);
+      } catch {
+        console.log("is this is");
+      }
     });
 
     this.view.fahrenheitBtn.addEventListener("click", () =>
@@ -45,9 +49,14 @@ export class ForecastController {
   }
 
   async handleSearch(location) {
-    const model = await WeatherForecast.create(location);
-    this.setModel(model);
-    this.updateView(model);
+    try {
+      const model = await WeatherForecast.create(location);
+      this.setModel(model);
+      this.updateView(model);
+      this.view.removeLocationError();
+    } catch {
+      this.view.addLocationError();
+    }
   }
 
   handleToggleUnits() {

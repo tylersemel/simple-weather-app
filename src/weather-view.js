@@ -27,8 +27,13 @@ export class ForecastView {
     this.locationSearchForm = this.rootContainer.querySelector(
       ".location-search form",
     );
+    this.locationSearchFormP = this.locationSearchForm.querySelector("p");
+    this.locationError = this.header.querySelector("#location-error");
+
     this.fahrenheitBtn = this.weatherCardsMain.querySelector("#fahrenheit");
     this.celsiusBtn = this.weatherCardsMain.querySelector("#celsius");
+
+    this.removeLocationError();
   }
 
   //main
@@ -352,8 +357,9 @@ export class ForecastView {
       weatherForecast.unit;
     conditionsElement.textContent = weatherForecast.currentWeather.conditions;
     precipElement.textContent =
-      weatherForecast.currentWeather.precipitation + "%";
-    humidityElement.textContent = weatherForecast.currentWeather.humidity + "%";
+      weatherForecast.currentWeather.precipitation.toFixed(0) + "%";
+    humidityElement.textContent =
+      weatherForecast.currentWeather.humidity.toFixed(0) + "%";
     windElement.textContent = weatherForecast.currentWeather.wind + " MPH";
   }
 
@@ -476,5 +482,15 @@ export class ForecastView {
 
     this.enableButton(toEnable);
     this.disableButton(toDisable);
+  }
+
+  removeLocationError() {
+    this.locationSearchFormP.classList.remove("error");
+    this.locationError.classList.remove("error");
+  }
+
+  addLocationError() {
+    this.locationSearchFormP.classList.add("error");
+    this.locationError.classList.add("error");
   }
 }

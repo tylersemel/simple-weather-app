@@ -194,19 +194,19 @@ input[type="text"] {
 }
 
 .root.container {
-  height: 100%;
   width: 100%;
   min-width: 450px;
   position: relative;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 65px auto;
+  grid-template-rows: 65px 1fr;
+  min-height: 100vh;
   font-family: var(--font-regular);
   font-size: var(--default-font-size);
 }
 
 .header {
-  /* position: sticky; */
+  position: sticky;
   top: 0;
 
   padding: 5px 10px;
@@ -216,7 +216,6 @@ input[type="text"] {
   justify-content: center;
   align-items: center;
 
-  overflow: hidden;
   white-space: nowrap;
 
   background-color: var(--color-oxford-blue);
@@ -329,6 +328,7 @@ input[type="text"] {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1rem;
+  font-family: var(--font-regular);
 }
 
 .left-cards,
@@ -358,6 +358,7 @@ input[type="text"] {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  color: var(--secondary-text-color);
 }
 
 .card .subheader span:first-child {
@@ -553,6 +554,10 @@ input[type="text"] {
   align-items: center;
 }
 
+.card.sun .card-right {
+  text-align: right;
+}
+
 .card.sun .icon {
   width: 60px;
   height: 60px;
@@ -694,4 +699,51 @@ input[type="text"] {
 .card.forecast .card-body .day .precipitation img {
   height: 20px;
   width: 20px;
+}
+
+.location-search search form p.error {
+  border: 3px solid #ff240c;
+  background-color: #ffd3d3;
+  color: rgb(176, 0, 0);
+}
+
+.location-search search form p.error input,
+.location-search search form p.error label {
+  background-color: #ffd3d3;
+}
+
+.location-search {
+  position: relative;
+}
+
+#location-error {
+  display: none;
+}
+
+#location-error.error {
+  display: block;
+}
+
+.error-message {
+  background-color: #ffd3d3;
+  width: fit-content;
+  min-width: fit-content;
+  height: 35px;
+  position: absolute;
+  top: 100;
+  left: 0;
+  border: 3px solid rgb(255, 28, 28);
+  margin-top: 3px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#location-error.error-message:after {
+  content: "Please enter a valid location";
+  color: rgb(176, 0, 0);
+  padding: 10px;
+  text-align: center;
 }
