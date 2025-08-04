@@ -34,8 +34,8 @@ export class ForecastController {
       const location = new FormData(e.target).get("location");
       try {
         this.handleSearch(location);
-      } catch {
-        console.log("is this is");
+      } catch (err) {
+        console.error(err);
       }
     });
 
@@ -50,6 +50,7 @@ export class ForecastController {
 
   async handleSearch(location) {
     try {
+      console.log("here");
       const model = await WeatherForecast.create(location);
       this.setModel(model);
       this.updateView(model);

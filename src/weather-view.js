@@ -7,7 +7,6 @@ export class ForecastView {
     this.mainContainer = this.rootContainer.querySelector(".main-container");
 
     this.init();
-    // this.disableButton(this.celsiusBtn);
   }
 
   //may not need
@@ -297,10 +296,6 @@ export class ForecastView {
   }
 
   renderTodayCard(weatherForecast) {
-    //getting the elements of the card that need to be filled with current weather data
-    // const todayItem = this.leftCards.find((item) => item.title == "today");
-    // const todayCard = todayItem.card;
-
     const todayCard = this.weatherCardsMain.querySelector(".card.today");
 
     const dateTime = todayCard.querySelector(".date");
@@ -482,6 +477,8 @@ export class ForecastView {
 
     this.enableButton(toEnable);
     this.disableButton(toDisable);
+
+    this.locationSearchForm.querySelector("#location").value = "";
   }
 
   removeLocationError() {

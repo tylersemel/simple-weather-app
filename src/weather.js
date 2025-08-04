@@ -168,7 +168,7 @@ class WeatherForecast {
         currentWeather,
         days,
         data.description,
-        data.address,
+        data.resolvedAddress,
       );
     } catch (err) {
       console.error(err);
