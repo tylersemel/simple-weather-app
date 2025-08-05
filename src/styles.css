@@ -747,3 +747,21 @@ input[type="text"] {
   padding: 10px;
   text-align: center;
 }
+
+:focus {
+  outline: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+p.error input:-webkit-autofill,
+p.error input:-webkit-autofill:hover,
+p.error input:-webkit-autofill:focus,
+p.error input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #ffd3d3 inset !important;
+}
