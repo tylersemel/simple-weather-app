@@ -1,6 +1,6 @@
 # Weather App
 A weather application that lets you search for weather in any part of the world and change the temperature to Fahrenheit or Celsius based on your preference. 
-Live preview [here](https://tylersemel.github.io/simple-weather-app/)!
+Live preview [here](https://tylersemel.github.io/weather-app/)!
 
 ## Features
 - Search for weather based on a city, address, or country.
