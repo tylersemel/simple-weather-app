@@ -16,7 +16,7 @@ Live preview [here](https://tylersemel.github.io/simple-weather-app/)!
 - **Virtual Crossing's Weather API**: API for requesting weather data about a specific location.
 
 ## Summary
-Through this project I made use of the module pattern through classes to create and show Weather information. 
+Through this project I made use of the module pattern through classes to create and show weather information. 
 
   
 
